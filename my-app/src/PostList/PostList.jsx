@@ -1,10 +1,16 @@
 import React from "react"; 
 import Post from "../Post/Post";
+import { Grid } from "@mui/material";
 
-
-const PostList = () => {
+const PostList = ({posts}) => {
   return (
-    <Post/>
+    <Grid container spacing={2}>
+      {posts.map(item =>(
+        <Post key={item._id} {...item}/>
+      ))}
+      
+    </Grid>
+    
   );
 };
 

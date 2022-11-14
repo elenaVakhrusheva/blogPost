@@ -11,6 +11,13 @@ import Typography from '@mui/material/Typography';
 import {MoreVert, Favorite, ExpandMore} from '@mui/icons-material';
 import {styled} from "@mui/material/styles";
 import { useState } from "react";
+import { Grid } from "@mui/material";
+
+import s from "./style.module.css"
+
+import dayjs from "dayjs";
+import "dayjs/locale/ru";
+dayjs.locale('ru')
 
 const ExpandMoreStyled = styled((props) => {
   const { expand, ...other } = props;
@@ -23,8 +30,8 @@ const ExpandMoreStyled = styled((props) => {
   }), */
 }));
 
-const Post = () => {
-
+const Post = ({image, title, author={}, text, created_at }) => {
+  const {email} = author;
   const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -33,30 +40,31 @@ const Post = () => {
 
   return (   
 
-
-     <Card sx={{ maxWidth: 345 }}>8525
+    <Grid item xs={12} sm={6} md={4} >
+     <Card className={s.card}>8525
       <CardHeader
         avatar={
           <Avatar aria-label="recipe">
-            R
+            {email?.slice(0,1).toUpperCase()}
           </Avatar>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={email}
+        subheader={dayjs(created_at).format('dddd, YYYY-MM-DD')}
       />
        <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
+        image={image}
+        alt={title}
       />
+
        <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+        <Typography variant="h5">{title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" noWrap>{text}
         </Typography>
       </CardContent>
+
        <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <Favorite />
@@ -74,35 +82,13 @@ const Post = () => {
 
        <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
           <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-            large plate and set aside, leaving chicken and chorizo in the pan. Add
-            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-            stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is absorbed,
-            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without
-            stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don&apos;t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
+            {text}
+          </Typography>          
         </CardContent>
       </Collapse>
      </Card>
-     
+    </Grid> 
   );
 };
 
