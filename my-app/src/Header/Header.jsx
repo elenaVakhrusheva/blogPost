@@ -6,29 +6,30 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import SpeakerNotesOutlinedIcon from '@mui/icons-material/SpeakerNotesOutlined';
+import Grid from '@mui/material/Grid';
+import { Container } from "@mui/system";
 
 const Header = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Posts
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
+      <AppBar position="static" >
+        <Container  maxWidth="lg">
+          <Grid container spacing={3}>
+            <Grid item lg={12} > 
+              <Toolbar>
+                <SpeakerNotesOutlinedIcon/>
+                <Typography variant="h6" component="div" align="left" sx={{ flexGrow: 1 }}>
+                  Мои посты
+                </Typography>
+                <Button color="inherit">Login</Button>
+              </Toolbar>
+            </Grid>
+          </Grid>
+        </Container>
       </AppBar>
     </Box>
+    
   );
 };
 
