@@ -8,7 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
-import {MoreVert, Favorite, ExpandMore} from '@mui/icons-material';
+import {/* MoreVert, */ Favorite, ExpandMore} from '@mui/icons-material';
 import {styled} from "@mui/material/styles";
 import { useState } from "react";
 import { Grid } from "@mui/material";
@@ -41,10 +41,10 @@ const Post = ({image, title, author={}, text, created_at }) => {
   return (   
 
     <Grid item xs={12} sm={6} md={4} >
-     <Card className={s.card}>8525
-      <CardHeader
+     <Card className={s.card}> 
+      <CardHeader align="left"
         avatar={
-          <Avatar aria-label="recipe">
+          <Avatar  >
             {email?.slice(0,1).toUpperCase()}
           </Avatar>
         }
@@ -59,9 +59,9 @@ const Post = ({image, title, author={}, text, created_at }) => {
       />
 
        <CardContent>
-        <Typography variant="h5">{title}
+        <Typography variant="h6"  align="left" className={s.titlePost}>{title}
         </Typography>
-        <Typography variant="body2" color="text.secondary" noWrap>{text}
+        <Typography variant="body2" color="text.secondary" noWrap align="left">{text}
         </Typography>
       </CardContent>
 

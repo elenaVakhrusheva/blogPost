@@ -9,10 +9,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
  
 import s from "./style.module.css";
 
-
 const Footer = () => {
   return (
-     <Box className={s.footer} >
+     <Box sx={{ flexGrow: 1 }}  className={s.footer} >
       <Container  maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item lg={4} className={s.footerItem}>

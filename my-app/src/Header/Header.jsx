@@ -22,7 +22,7 @@ const Header = () => {
               <Toolbar>
                 <SpeakerNotesOutlinedIcon/>
                 <Typography variant="h6" component="div" align="left" sx={{ flexGrow: 1 }}>
-                  Мои посты
+                  &nbsp;Мои посты
                 </Typography>
                 <Button color="inherit">Login</Button>
               </Toolbar>

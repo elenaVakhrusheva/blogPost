@@ -15,7 +15,7 @@ const Breadcrumb = () => {
       <Container  maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item lg={12} >
-              <Breadcrumbs aria-label="breadcrumb" >
+              <Breadcrumbs maxItems={2}  aria-label="breadcrumb" >
                 <Link underline="hover" color="inherit" href="#">Главная</Link>
                 <Typography color="text.primary">Все посты</Typography>
               </Breadcrumbs>
