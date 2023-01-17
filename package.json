@@ -8,5 +8,9 @@
     "@mui/styled-engine-sc": "^5.10.6",
     "dayjs": "^1.11.6",
     "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
+
 }

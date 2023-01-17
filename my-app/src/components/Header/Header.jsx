@@ -9,10 +9,10 @@ import MenuIcon from '@mui/icons-material/Menu'; */
 import SpeakerNotesOutlinedIcon from '@mui/icons-material/SpeakerNotesOutlined';
 import Grid from '@mui/material/Grid';
 import { Container } from "@mui/system";
-
 import s from "./style.module.css";
 
-const Header = () => {
+const Header = (user) => {
+   
   return (
     <Box sx={{ flexGrow: 1 }} className={s.header} >
       <AppBar position="static"   >
@@ -24,6 +24,9 @@ const Header = () => {
                 <Typography variant="h6" component="div" align="left" sx={{ flexGrow: 1 }}>
                   &nbsp;Мои посты
                 </Typography>
+                <div>
+                  {user.email && <span>{user.email}</span>}
+                </div>
                 <Button color="inherit">Login</Button>
               </Toolbar>
             </Grid>

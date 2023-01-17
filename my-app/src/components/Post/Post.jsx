@@ -8,12 +8,16 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
-import {/* MoreVert, */ Favorite, ExpandMore} from '@mui/icons-material';
+import {/* MoreVert, */  ExpandMore} from '@mui/icons-material';
 import {styled} from "@mui/material/styles";
 import { useState } from "react";
 import { Grid } from "@mui/material";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FancyButton from "../Like/Like";
 
 import s from "./style.module.css"
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import EditIcon from '@mui/icons-material/Edit';
 
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
@@ -30,25 +34,34 @@ const ExpandMoreStyled = styled((props) => {
   }), */
 }));
 
-const Post = ({image, title, author={}, text, created_at }) => {
-  const {email} = author;
+const Post = ({image, name, title, author={}, text, created_at, likes }) => {
+  const {avatar} = author.avatar;
   const [expanded, setExpanded] = useState(false);
-    const handleExpandClick = () => {
-      setExpanded(!expanded);
-    };
+  const handleExpandClick = () => { setExpanded(!expanded)};
 
+  const stateLike = likes.length;
+  const [like, setLike] = useState(stateLike);
+  const [isUserClick, setIsUserClick] = useState(false);
 
+  const handleClickLike = () => {
+    if(!isUserClick) {
+      setLike(like+1)
+      setIsUserClick(true)
+      } else {
+      setLike(like-1)
+      setIsUserClick(false)
+      }
+  }
+
+  
+
+  
   return (   
-
     <Grid item xs={12} sm={6} md={4} >
      <Card className={s.card}> 
       <CardHeader align="left"
-        avatar={
-          <Avatar  >
-            {email?.slice(0,1).toUpperCase()}
-          </Avatar>
-        }
-        title={email}
+        avatar={ <Avatar alt={author.name} src={author.avatar} /> }
+        title={author.name}
         subheader={dayjs(created_at).format('dddd, YYYY-MM-DD')}
       />
        <CardMedia
@@ -65,10 +78,10 @@ const Post = ({image, title, author={}, text, created_at }) => {
         </Typography>
       </CardContent>
 
-       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <Favorite />
-        </IconButton>
+       <CardActions disableSpacing>       
+        <IconButton aria-label="add to favorites" onClick={handleClickLike}>
+          <FavoriteBorderIcon /> <span className={s.likeCount}>{like}</span>
+        </IconButton> 
         
         <ExpandMoreStyled
           expand={expanded}
@@ -78,13 +91,22 @@ const Post = ({image, title, author={}, text, created_at }) => {
         >
           <ExpandMore />
         </ExpandMoreStyled>
+
+        <IconButton aria-label="delete"  onClick={()=>alert('DELETE')}  /* onClick={() => onRemoveClick()} */  >
+          <DeleteOutlineOutlinedIcon />
+        </IconButton>
+
+        <IconButton aria-label="edit" >
+          <EditIcon /> 
+        </IconButton>
       </CardActions>
 
        <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
             {text}
-          </Typography>          
+          </Typography>     
+        
         </CardContent>
       </Collapse>
      </Card>
