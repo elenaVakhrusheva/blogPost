@@ -21,6 +21,13 @@ class Api {
     }).then(onResponce)    
   }
 
+  getPost(_id) {
+    return fetch( `${this._baseUrl}/v2/group-7/posts/${_id}`, {
+      method: "GET",
+      headers: this._headers
+    }).then(onResponce)    
+  }
+
   changeLikePost(_id, isLike) {
     return fetch(`${this._baseUrl}/products/likes/${_id}`, {
     method: isLike ? "DELETE" : "PUT",
@@ -28,13 +35,28 @@ class Api {
     }).then(onResponce)
  }
 
-  deletePost(_id, isDelete) {
+  addPost(post) {
+    return fetch( `${this._baseUrl}/v2/group-7/posts`, {
+      method: "POST",      
+      headers: this._headers,
+      body: JSON.stringify(post)
+    }).then(onResponce)    
+  }
+
+  deletePost(_id) {
     return fetch(`${this._baseUrl}/v2/group-7/posts/${_id}`, {
-    method: isDelete ? "DELETE" : "PUT",
+    method: "DELETE",
     headers: this._headers
     }).then(onResponce)
  }
-
+  
+  editPost(post, _id) {
+    return fetch(`${this._baseUrl}/v2/group-7/posts/${_id}`, {
+    method: "PATCH",        
+    headers: this._headers,
+    body: JSON.stringify(post)
+    }).then(onResponce)    
+  }
 
 }
 

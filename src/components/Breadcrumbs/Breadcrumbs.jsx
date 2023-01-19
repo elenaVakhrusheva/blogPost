@@ -1,19 +1,15 @@
-import React, { useState } from "react"; 
+import React from "react"; 
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box'; 
 import { Container } from "@mui/system";
 import { Link } from "@mui/icons-material";
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Button from '@mui/material/Button'; 
-
-
-import s from "./style.module.css";
 import ModalForm from "../ModalForm/ModalForm";
 
+import s from "./style.module.css";
 
-const Breadcrumb = ({posts, setPosts, create}) => {
- // console.log(posts,setPosts)
+const Breadcrumb = ({create}) => {
   return (
      <Box className={s.breadcrumb} >
       <Container  maxWidth="lg">
@@ -29,15 +25,13 @@ const Breadcrumb = ({posts, setPosts, create}) => {
                 <h2 variant='h2' align='left'  className="h2">Можете ознакомиться со списком постов: </h2>
               </Grid>
               <Grid item lg={4} >
-                <ModalForm posts={posts} setPosts={setPosts} create={createPost}/>
+                <ModalForm create={create}/>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Container>
      </Box>
-     
-
   );
 };
 

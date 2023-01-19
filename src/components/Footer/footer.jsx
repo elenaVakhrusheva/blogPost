@@ -9,13 +9,13 @@ import GitHubIcon from '@mui/icons-material/GitHub';
  
 import s from "./style.module.css";
 
-const Footer = () => {
+const Footer = ({users}) => {
   return (
      <Box sx={{ flexGrow: 1 }}  className={s.footer} >
       <Container  maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item lg={4} className={s.footerItem}>
-            <Box>Автор проекта: Вахрушева Елена. 2022 ©
+            <Box>Автор проекта:<br/> {users.name}. 2022 ©
             </Box>
           </Grid>
           <Grid item lg={4} className={s.footerItem}>
@@ -25,7 +25,7 @@ const Footer = () => {
             <Link href="https://github.com/elenaVakhrusheva"  underline="none" className={s.link} ><GitHubIcon/></Link>            
           </Grid>
            <Grid item lg={4} className={s.footerItem}>
-            <Link href="mail:elena.vakhrusheva92@yandex.ru"  className={s.link}  >elena.vakhrusheva92@yandex.ru</Link>
+            <Link href="mail:elena.vakhrusheva92@yandex.ru"  className={s.link}  >{users.email}</Link>
           </Grid>
         </Grid>
       </Container>
