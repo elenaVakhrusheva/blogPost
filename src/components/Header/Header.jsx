@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,9 +8,12 @@ import SpeakerNotesOutlinedIcon from '@mui/icons-material/SpeakerNotesOutlined';
 import Grid from '@mui/material/Grid';
 import { Container } from "@mui/system";
 import s from "./style.module.css";
-import api from "../../utils/api";
+import api from "../../utils/api"; 
+import { UserContext } from "../../context/userContext";
+
+const Header = () => {
+  const user = useContext(UserContext);
  
-const Header = ({users}) => {
   return (
     <Box sx={{ flexGrow: 1 }} className={s.header} >
       <AppBar position="static"   >
@@ -23,7 +26,7 @@ const Header = ({users}) => {
                   &nbsp;Мои посты
                 </Typography>
                  <div>
-                  {<span>{users.email}</span> && <span>{users.name}</span>} 
+                  {<span>{user.email}</span> && <span>{user.name}</span>} 
                 </div>  
               </Toolbar>
             </Grid>

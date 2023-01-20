@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box'; 
 import { Container } from "@mui/system";
@@ -6,16 +6,19 @@ import { Link } from "@mui/material";
 import TelegramIcon from '@mui/icons-material/Telegram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import GitHubIcon from '@mui/icons-material/GitHub';
- 
+import { UserContext } from "../../context/userContext";
 import s from "./style.module.css";
 
-const Footer = ({users}) => {
+
+const Footer = () => {
+  const user = useContext(UserContext);
+
   return (
      <Box sx={{ flexGrow: 1 }}  className={s.footer} >
       <Container  maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item lg={4} className={s.footerItem}>
-            <Box>Автор проекта:<br/> {users.name}. 2022 ©
+            <Box>Автор проекта:<br/> {user.name}. 2022 ©
             </Box>
           </Grid>
           <Grid item lg={4} className={s.footerItem}>
@@ -25,7 +28,7 @@ const Footer = ({users}) => {
             <Link href="https://github.com/elenaVakhrusheva"  underline="none" className={s.link} ><GitHubIcon/></Link>            
           </Grid>
            <Grid item lg={4} className={s.footerItem}>
-            <Link href="mail:elena.vakhrusheva92@yandex.ru"  className={s.link}  >{users.email}</Link>
+            <Link href="mail:elena.vakhrusheva92@yandex.ru"  className={s.link}  >{user.email}</Link>
           </Grid>
         </Grid>
       </Container>
