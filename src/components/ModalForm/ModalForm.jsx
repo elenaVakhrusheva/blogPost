@@ -9,7 +9,6 @@ import FormGroup from '@mui/material/FormGroup';
 import { useState } from 'react';
 import api from '../../utils/api.js';
 
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -70,14 +69,14 @@ export default function ModalForm({create}) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
-         <Box sx={style}>
-          <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-            <FormLabel component="legend">Добавление поста</FormLabel>
+         <Box sx={style} align="center">
+          <FormControl size="medium" component="fieldset" variant="standard">
+            <FormLabel component="legend" style={{textAlign:'center', color: '#201f1f', fontWeight: '700', fontSize: '21px', marginBottom: '1em'}}>Добавление поста</FormLabel>
               <FormGroup>
                 <Input 
                   placeholder="Название поста" 
                   fullWidth 
-                  margin="dense" 
+                  style={{marginBottom:'0.5em'}} 
                   defaultValue={titlePost} 
                   onChange={(e) => { setTitlePost(e.target.value) }} 
                   ref={bodyInputRef}/>                
@@ -89,7 +88,7 @@ export default function ModalForm({create}) {
                     aria-label="maximum height"
                     placeholder="Описание поста"
                     defaultValue={bodyPost} 
-                    style={{ width: 200 }}
+                    style={{ width: 300 }}
                     ref={bodyInputRef}
                    onChange={(e) => { setBodyPost(e.target.value) }} 
                   />                
@@ -104,11 +103,8 @@ export default function ModalForm({create}) {
               <Button variant="outlined" onClick={addPost}> Опубликовать </Button>
            </FormControl>
           </Box>
-      </Modal>
-   
-   
-    </div>
-    
+      </Modal>  
+    </div>    
   );
 }
  

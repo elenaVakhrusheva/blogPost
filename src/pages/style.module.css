@@ -1,0 +1,22 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.titlePost {
+      font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 1em;
+}
+
+.likePost svg {
+  fill: red;
+}
+
+.likeCount {
+    font-size: 13px;
+    border-radius: 50%;
+    padding: 3px 6px;
+    margin-bottom: -5px;
+}

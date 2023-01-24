@@ -1,4 +1,4 @@
-import React from "react";  
+import React, { useContext } from "react";  
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
@@ -19,38 +19,32 @@ import {Link } from 'react-router-dom';
 import PostForm from "../PostForm/PostForm";
 
 import api from '../../utils/api';
-import s from "./style.module.css"
+import s from "./style.module.css";
 
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
+import { UserContext } from "../../context/userContext";
 dayjs.locale('ru')
 
-
-
 const ExpandMoreStyled = styled((props) => {
-    const { expand, ...other } = props;
-      return <IconButton {...other} />;
-    })(({ expand }) => ({
-      transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  const { expand, ...other } = props;
+    return <IconButton {...other} />;
+  })(({ expand }) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
       marginLeft: 'auto',
     }));
 
-/* function displayIcon(props){
-  if()
-    return
-  else
-    return
-} */
-
-const Post = ({image, name, title, author={}, text, created_at, likes, _id, deletePost, editPost }) => {
-  const {avatar} = author.avatar;
+const Post = ({image, name, title, author=[], text, created_at, likes, _id, deletePost, editPost, setPosts }) => {
+  const user = useContext(UserContext); 
+  const avatar = author.avatar;
+  
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => { setExpanded(!expanded)};
 
-  const stateLike = likes.length;
+  const stateLike = likes?.length;
   const [like, setLike] = useState(stateLike);
   const [isUserClick, setIsUserClick] = useState(false);
-
+  
   const handleClickLike = () => {
     if(!isUserClick) {
       setLike(like+1)
@@ -68,25 +62,25 @@ const Post = ({image, name, title, author={}, text, created_at, likes, _id, dele
     })
   } 
 
-  const onEditClick =(post)=> {
-    api.editPost(post, _id)
-     .then((res)=>{
-      console.log(res)
-        this.setPost({post:res.post.post})
-    })    
-  }
-
-  
-
   const [openEdit, setOpenEdit] = React.useState(false);
   const handleOpenEdit = () => setOpenEdit(true);
-  const handleCloseEdit = () => setOpenEdit(false);
+  const handleCloseEdit = () => setOpenEdit(false); 
+ 
+  const onEditClick =(post)=> {
+      api.editPost(post, _id)
+      .then((res) =>{
+        editPost(_id, post)
+        setOpenEdit(false)
+        }) 
+  }
+
   return (   
     <Grid item xs={12} sm={6} md={4} >
      <Card className={s.card}> 
-      <CardHeader align="left"
+      <CardHeader align="left"      
         avatar={ <Avatar alt={author.name} src={author.avatar} /> }
         title={author.name}
+        
         subheader={dayjs(created_at).format('dddd, YYYY-MM-DD')} />
         <Link to={`/post/${_id}`} >
           <CardMedia
@@ -121,7 +115,7 @@ const Post = ({image, name, title, author={}, text, created_at, likes, _id, dele
           <DeleteOutlineOutlinedIcon />
         </IconButton>
 
-        <IconButton aria-label="edit" onClick={handleOpenEdit}   >
+       <IconButton aria-label="edit" onClick={handleOpenEdit}   >
           <EditIcon />  
           <PostForm 
             titlePost={title} 
@@ -133,9 +127,10 @@ const Post = ({image, name, title, author={}, text, created_at, likes, _id, dele
         </IconButton>
       </CardActions>
 
+
        <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>
+          <Typography paragraph align='left'>
             {text}
           </Typography>             
         </CardContent>

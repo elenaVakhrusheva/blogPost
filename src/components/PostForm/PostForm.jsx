@@ -19,34 +19,31 @@ const PostForm = ({titlePost, bodyPost, imgPost, openEdit, handleCloseEdit, edit
   const [bodyEditPost, setBodyEditPost]=useState(bodyPost);
   const [imgEditPost, setImgEditPost]=useState(imgPost);
 
- 
-
+  
   return (    
   <div>   
       <Modal
         open={openEdit}
-        onClose={handleCloseEdit}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
-         <Box sx={style}>
-          <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-            <FormLabel component="legend">Редактирование поста</FormLabel>
+        onClose={handleCloseEdit} >
+         <Box sx={style} align="center">
+          <FormControl size="medium" component="fieldset" variant="standard">
+            <FormLabel component="legend" style={{textAlign:'center', color: '#201f1f', fontWeight: '700', fontSize: '21px', marginBottom: '1em'}}>Редактирование поста</FormLabel>
               <FormGroup>
                 <Input 
                   placeholder="Название поста" 
                   fullWidth 
-                  margin="dense" 
+                  style={{marginBottom:'0.5em'}}
                   defaultValue={titleEditPost} 
                   onChange={(e) => { setTitleEditPost(e.target.value) }}/>                
               </FormGroup>
               <FormGroup>
                  <TextareaAutosize
                     minRows={3}
-                    maxRows={4}
+                    maxRows={6}
                     aria-label="maximum height"
                     placeholder="Описание поста"
                     defaultValue={bodyEditPost} 
-                    style={{ width: 200 }}
+                    style={{ width: 300 }}
                     onChange={(e) => { setBodyEditPost(e.target.value) }} 
                   />                
               </FormGroup>
@@ -61,7 +58,7 @@ const PostForm = ({titlePost, bodyPost, imgPost, openEdit, handleCloseEdit, edit
               <Button variant="outlined" 
                 onClick={() => {
                   editPost({title: titleEditPost, text: bodyEditPost, image:imgEditPost});
-                  handleCloseEdit(false)
+                     
                 }}> Опубликовать </Button> 
            </FormControl>
           </Box>
